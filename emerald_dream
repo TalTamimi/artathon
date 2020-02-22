@@ -12,14 +12,12 @@ sand = (245, 222, 173)
 grey = (200, 200, 200)
 black = (0, 0, 0)
 
-
 boss_x = 50
 boss_y = 350
 
 boss_orbit = 0
 ship_orbit = 0
 i = 1
-clock = pygame.time.Clock()
 
 running = True
 
@@ -32,12 +30,12 @@ while running:
             running = False
 
     boss_x = math.cos(boss_orbit) * 300 + width / 2
-    boss_y = -math.sin(boss_orbit) * 100 + (height-400)/ 2
+    boss_y = -math.sin(boss_orbit) * 100 + (height - 400) / 2
 
     ship_x = math.cos(ship_orbit) * 300 + boss_x
     ship_y = -math.sin(ship_orbit) * 300 + boss_y
 
-    boss_orbit += .02
+    boss_orbit += .3
     ship_orbit += .1
 
     # reset the screen
@@ -50,19 +48,21 @@ while running:
         pygame.draw.line(screen, white, (x, y), (x, y))
     i = i * -1
 
+    print(boss_orbit)
     island = pygame.image.load("island.png")
 
     moon = pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Unknown (1).png").convert(), (160, 200)),
                                    i * 5)
     ship = pygame.transform.scale((pygame.image.load("ship.png")), (300, 200))
-    boss = pygame.transform.scale(pygame.image.load("Picture1.png"), (160, 200))
+    boss = pygame.transform.flip(pygame.transform.scale(pygame.image.load("Picture1.png"), (160, 200)), boss_orbit < 3,
+                                 False)
 
-    sea =  pygame.transform.rotate(pygame.transform.scale(pygame.image.load("sea.png"), (width, 300)),i * 0.05)
+    sea = pygame.transform.rotate(pygame.transform.scale(pygame.image.load("sea.png"), (width, 300)), i * 0.05)
 
     # pygame.draw.circle(screen, sand, island_place, island)
-    screen.blit(sea, (0, height -200))
+    screen.blit(sea, (0, height - 200))
 
-    screen.blit(island, (int(width / 2)-200, height - 550))
+    screen.blit(island, (int(width / 2) - 200, height - 550))
 
     screen.blit(boss, (int(boss_x), int(boss_y)))
     screen.blit(ship, (int(ship_x), int(ship_y)))
@@ -72,7 +72,6 @@ while running:
 
     pygame.display.flip()
 
-    clock.tick(60)
-    pygame.image.save(screen,"dr/sun"+str(boss_orbit)+".png")
+    # pygame.image.save(screen,"dr/sun"+str(boss_orbit)+".png")
 
 pygame.quit()

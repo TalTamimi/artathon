@@ -23,6 +23,8 @@ running = True
 
 stars = [(random.randint(0, 1920), random.randint(0, 1080)) for x in range(140)]
 
+index = 0
+
 while running:
 
     for event in pygame.event.get():
@@ -35,8 +37,8 @@ while running:
     ship_x = math.cos(ship_orbit) * 300 + boss_x
     ship_y = -math.sin(ship_orbit) * 300 + boss_y
 
-    boss_orbit += .3
-    ship_orbit += .1
+    boss_orbit += .1
+    ship_orbit += .03
 
     # reset the screen
     screen.fill(black)
@@ -72,6 +74,9 @@ while running:
 
     pygame.display.flip()
 
-    # pygame.image.save(screen,"dr/sun"+str(boss_orbit)+".png")
+    index += 1
+    pygame.image.save(screen, "dr2/Image%06d.png" % index)
+    if index > 40000:
+        break
 
 pygame.quit()

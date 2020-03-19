@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 
-for M_FOLDER in M*/; 
+for M_FOLDER in Out/M*/; 
 do
     #! /usr/bin/bash
     images=("$M_FOLDER*.jpg")
@@ -65,7 +65,7 @@ final_distination="./FinalDistination"
 mkdir $final_distination
 echo $final_distination
 
-for M_FOLDER in M*/; 
+for M_FOLDER in Out/M*/; 
 do
     concat_target_folder=("${M_FOLDER}Concat")
     echo $concat_target_folder
